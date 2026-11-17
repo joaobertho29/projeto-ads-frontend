@@ -31,5 +31,4 @@ export class CategoriaService {
     return this.http.put<Categoria>(`${this.API}/${id}`,dados);
   }
 
-  
 }
