@@ -10,9 +10,9 @@ import {
 export class CategoriaService {
 
   private categorias: Categoria[] = [
-    { id: 1, descricao: 'Salário', tipo: 'RECEITA', ativo: true },
-    { id: 2, descricao: 'Alimentação', tipo: 'DESPESA', ativo: true },
-    { id: 3, descricao: 'Moradia', tipo: 'DESPESA', ativo: true }
+    { id: 1, descricao: 'Salário', tipo: 'RECEITA', ativa: true },
+    { id: 2, descricao: 'Alimentação', tipo: 'DESPESA', ativa: true },
+    { id: 3, descricao: 'Moradia', tipo: 'DESPESA', ativa: true }
   ];
 
   private proximoId = 4;
@@ -61,7 +61,7 @@ export class CategoriaService {
       return undefined;
     }
 
-    categoria.ativo = !categoria.ativo;
+    categoria.ativa = !categoria.ativa;
 
     return categoria;
   }
