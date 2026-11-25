@@ -10,7 +10,7 @@ import { LancamentoForm } from '../lancamento-form/lancamento-form';
   templateUrl: './lancamento-lista.html'
 })
 export class LancamentoLista implements OnInit {
-  readonly usuarioId = 1; // APENAS para laboratório, sem JWT
+  
   lancamentos = signal<LancamentoResponse[]>([]);
   carregando = signal(false);
   erro = signal('');
@@ -26,7 +26,7 @@ export class LancamentoLista implements OnInit {
   carregar(): void {
     this.carregando.set(true);
     this.erro.set('');
-    this.lancamentoService.listar(this.usuarioId).subscribe({
+    this.lancamentoService.listar().subscribe({
       next: dados => {
         this.lancamentos.set(dados);
         this.carregando.set(false);

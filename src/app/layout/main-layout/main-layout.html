@@ -1,13 +1,33 @@
 <div class="app-shell">
-<nav class="navbar navbar-expand-lg navbar-dark bg-primary"><div class="container-fluid px-4">
-  <a class="navbar-brand fw-semibold brand-mark" routerLink="/categorias">Controle Financeiro</a>
-  <div class="navbar-nav flex-row flex-wrap gap-3">
-    <a class="nav-link" routerLink="/dashboard" routerLinkActive="active">Dashboard</a>
-    <a class="nav-link" routerLink="/lancamentos" routerLinkActive="active">Lançamentos</a>
-    <a class="nav-link" routerLink="/categorias" routerLinkActive="active">Categorias</a>
-    <a class="nav-link" routerLink="/usuarios" routerLinkActive="active">Usuários</a>
-  </div>
-</div></nav>
-<main class="container content-area py-4"><router-outlet /></main>
-<footer class="text-center text-secondary small py-4">Projeto acadêmico · Aula 1 · Dados em memória</footer>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <div class="container-fluid px-4">
+      <a class="navbar-brand fw-semibold brand-mark" routerLink="/categorias">Controle Financeiro</a>
+
+      <div class="navbar-nav flex-row flex-wrap gap-3">
+        <a class="nav-link" routerLink="/dashboard" routerLinkActive="active">Dashboard</a>
+        <a class="nav-link" routerLink="/lancamentos" routerLinkActive="active">Lançamentos</a>
+        <a class="nav-link" routerLink="/categorias" routerLinkActive="active">Categorias</a>
+        @if (auth.podeVerUsuarios()) {
+          <a class="nav-link" routerLink="/usuarios" routerLinkActive="active">Usuários</a>
+        }
+      </div>
+
+      <div class="d-flex align-items-center gap-3">
+        <span class="text-white small fw-medium">{{ auth.nomeUsuario() }}</span>
+        <button type="button" class="btn btn-outline-light btn-sm" (click)="sair()">Sair</button>
+      </div>
+    </div>
+  </nav>
+
+  <main class="container content-area py-4">
+    @if (auth.avisoAcessoNegado(); as aviso) {
+      <div class="alert alert-warning alert-dismissible d-flex justify-content-between align-items-center" role="alert">
+        <span>{{ aviso }}</span>
+        <button type="button" class="btn-close" aria-label="Fechar" (click)="auth.limparAvisoAcessoNegado()"></button>
+      </div>
+    }
+    <router-outlet />
+  </main>
+
+  <footer class="text-center text-secondary small py-4">Projeto acadêmico · Aula 1 · Dados em memória</footer>
 </div>

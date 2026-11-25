@@ -11,8 +11,7 @@ import { LancamentoRequest, LancamentoResponse } from '../../../models/lancament
   templateUrl: './lancamento-form.html'
 })
 export class LancamentoForm implements OnInit {
-  usuarioId = input.required<number>();
-  
+
   lancamento = input<LancamentoResponse | null>(null);
 
   cancelou = output<void>();
@@ -89,7 +88,7 @@ export class LancamentoForm implements OnInit {
     const itemAtual = this.lancamento();
 
     if (itemAtual) {
-      this.lancamentosService.atualizar(this.usuarioId(), itemAtual.id, dados).subscribe({
+      this.lancamentosService.atualizar(itemAtual.id, dados).subscribe({
         next: () => {
           this.salvando.set(false);
           this.formulario.reset();
@@ -107,7 +106,7 @@ export class LancamentoForm implements OnInit {
         }
       });
     } else {
-      this.lancamentosService.cadastrar(this.usuarioId(), dados).subscribe({
+      this.lancamentosService.cadastrar(dados).subscribe({
         next: () => {
           this.salvando.set(false);
           this.formulario.reset();
